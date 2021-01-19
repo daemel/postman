@@ -1,0 +1,636 @@
+{
+	"info": {
+		"_postman_id": "c0709ff6-7cf1-42fc-afbb-68ad1e8babd6",
+		"name": "FHIR CALLS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Metadata",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{fhirurl}}/Metadata",
+					"host": [
+						"{{fhirurl}}"
+					],
+					"path": [
+						"Metadata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AuthorizeGetToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"bearerToken\", jsonData.access_token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkN0VHVoTUptRDVNN0RMZHpEMnYyeDNRS1NSWSIsImtpZCI6IkN0VHVoTUptRDVNN0RMZHpEMnYyeDNRS1NSWSJ9.eyJhdWQiOiJodHRwczovL3BhYzJmaGlyLmF6dXJlaGVhbHRoY2FyZWFwaXMuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNmE3MTQ1NzktYWIyYS00ZDk4LTliMzktOTNhMjFlZjRlYmYyLyIsImlhdCI6MTU4ODc4NjU2MywibmJmIjoxNTg4Nzg2NTYzLCJleHAiOjE1ODg3OTA0NjMsImFjciI6IjEiLCJhaW8iOiI0MmRnWUtoaVpsUTcrS250VUtYUUttWE93THJEb2JOVXVSTFAxYjFlT0xVcmRwcEw2VllBIiwiYW1yIjpbInB3ZCJdLCJhcHBpZCI6IjcxZjU1ZDI3LWU5NzUtNDc4Mi05YWE3LTMyMGNlZWIwNDJhZiIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiQ29ubmVjdG9yIiwiZ2l2ZW5fbmFtZSI6IlB3ckFwcCIsImlwYWRkciI6IjI0LjEyNi4xNzUuMTk4IiwibmFtZSI6IlB3ckFwcCBDb25uZWN0b3IiLCJvaWQiOiI3NzA3MTJmMS0wNDA2LTQ5MmUtYTNhNC0yYmY5OTAyYWQxMGIiLCJzY3AiOiJ1c2VyX2ltcGVyc29uYXRpb24iLCJzdWIiOiJDMkhIUlBYNkllYUo1Z0twOEZNTEFNTkVrT2k3bUtRZWdyOGdYeldnaHBrIiwidGlkIjoiNmE3MTQ1NzktYWIyYS00ZDk4LTliMzktOTNhMjFlZjRlYmYyIiwidW5pcXVlX25hbWUiOiJQd3JBcHBDb25uZWN0b3JAZGVuZXh0Lm9ubWljcm9zb2Z0LmNvbSIsInVwbiI6IlB3ckFwcENvbm5lY3RvckBkZW5leHQub25taWNyb3NvZnQuY29tIiwidXRpIjoiZWo2WlF5aGY4a0t6Uk5fbFRrUnNBQSIsInZlciI6IjEuMCJ9.X_qZuyv5Pmtjgc83WkR14ks140bwIPoYOTE9JF5MFx5TG8FINByq019WfXTRyKGiMo91heJkQgOQJ46Wo9Mo4OFg_Cr_RgoP4eENuZlGa8lBUckJiZ4BY0APjfVRO7icgbSYir-5UI_--3pabudDcW0BD2eS6GBCG4efKyZScTyshMhrhTXPv0RB8aKo20SCXtVnGrK6oa_LGjwq6Dwrx_LmrMrqTw60MUHCqKs0RooIc9QaLNrvqC9O1AdptrdX8zJU-PauKzCaUCdkQLI2HYtHVSqo7yQp1AU-LHuRKwISYgOw2x1G7DIAcATF9O0mUV3Vq_-VvbwNJQsiDyiCzQ",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{clientId}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{clientSecret}}",
+							"type": "text"
+						},
+						{
+							"key": "resource",
+							"value": "{{resource}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://login.microsoftonline.com/{{tenantId}}/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Patients",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearerToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-MS-AZUREFHIR-AUDIT-USERID",
+						"value": "Dale",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{fhirurl}}/Patient",
+					"host": [
+						"{{fhirurl}}"
+					],
+					"path": [
+						"Patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Patient",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{bearerToken}}"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-MS-AZUREFHIR-AUDIT-USERID",
+						"type": "text",
+						"value": "Dale",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resourceType\": \"Patient\",\r\n    \"active\": true,\r\n    \"name\": [\r\n        {\r\n            \"use\": \"official\",\r\n            \"family\": \"familyname\",\r\n            \"given\": [\r\n                \"givenname_bob\",\r\n                \"middlename\"\r\n            ]\r\n        },\r\n        {\r\n            \"use\": \"usual\",\r\n            \"given\": [\r\n                \"nickname\"\r\n            ]\r\n        }\r\n    ],\r\n    \"telecom\": [\r\n        {\r\n            \"use\": \"home\"\r\n        },\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"123456789\",\r\n            \"use\": \"home\",\r\n            \"rank\": 1\r\n        },\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"098765432\",\r\n            \"use\": \"mobile\",\r\n            \"rank\": 2\r\n        },\r\n        {\r\n            \"system\": \"email\",\r\n            \"value\": \"givenname_bob.familyname@gmail.com\",\r\n            \"use\": \"home\"\r\n        }\r\n    ],\r\n    \"gender\": \"male\",\r\n    \"birthDate\": \"1970-01-22\",\r\n    \"deceasedBoolean\": false,\r\n    \"address\": [\r\n        {\r\n            \"use\": \"home\",\r\n            \"type\": \"both\",\r\n            \"text\": \"123 bookcase ave\",\r\n            \"line\": [\r\n                \"bookcase ave\"\r\n            ],\r\n            \"city\": \"city\",\r\n            \"district\": \"district\",\r\n            \"state\": \"va\",\r\n            \"postalCode\": \"09876\",\r\n            \"period\": {\r\n                \"start\": \"1980-01-31\"\r\n            }\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{fhirurl}}/Patient",
+					"host": [
+						"{{fhirurl}}"
+					],
+					"path": [
+						"Patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Patient Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{bearerToken}}"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-MS-AZUREFHIR-AUDIT-USERID",
+						"type": "text",
+						"value": "Dale",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resourceType\": \"Patient\",\r\n    \"active\": true,\r\n    \"name\": [\r\n        {\r\n            \"use\": \"official\",\r\n            \"family\": \"familyname\",\r\n            \"given\": [\r\n                \"givenname_bob\",\r\n                \"middlename\"\r\n            ]\r\n        },\r\n        {\r\n            \"use\": \"usual\",\r\n            \"given\": [\r\n                \"nickname\"\r\n            ]\r\n        }\r\n    ],\r\n    \"telecom\": [\r\n        {\r\n            \"use\": \"home\"\r\n        },\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"123456789\",\r\n            \"use\": \"home\",\r\n            \"rank\": 1\r\n        },\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"098765432\",\r\n            \"use\": \"mobile\",\r\n            \"rank\": 2\r\n        },\r\n        {\r\n            \"system\": \"email\",\r\n            \"value\": \"givenname_bob.familyname@gmail.com\",\r\n            \"use\": \"home\"\r\n        }\r\n    ],\r\n    \"gender\": \"male\",\r\n    \"birthDate\": \"1970-01-22\",\r\n    \"deceasedBoolean\": false,\r\n    \"address\": [\r\n        {\r\n            \"use\": \"home\",\r\n            \"type\": \"both\",\r\n            \"text\": \"123 bookcase ave\",\r\n            \"line\": [\r\n                \"bookcase ave\"\r\n            ],\r\n            \"city\": \"city\",\r\n            \"district\": \"district\",\r\n            \"state\": \"va\",\r\n            \"postalCode\": \"09876\",\r\n            \"period\": {\r\n                \"start\": \"1980-01-31\"\r\n            }\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{fhirurl}}/Patient",
+					"host": [
+						"{{fhirurl}}"
+					],
+					"path": [
+						"Patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Patient Bundle",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{bearerToken}}"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-MS-AZUREFHIR-AUDIT-USERID",
+						"type": "text",
+						"value": "Dale",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resourceType\": \"Patient\",\r\n    \"active\": true,\r\n    \"name\": [\r\n        {\r\n            \"use\": \"official\",\r\n            \"family\": \"familyname\",\r\n            \"given\": [\r\n                \"givenname_bob\",\r\n                \"middlename\"\r\n            ]\r\n        },\r\n        {\r\n            \"use\": \"usual\",\r\n            \"given\": [\r\n                \"nickname\"\r\n            ]\r\n        }\r\n    ],\r\n    \"telecom\": [\r\n        {\r\n            \"use\": \"home\"\r\n        },\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"123456789\",\r\n            \"use\": \"home\",\r\n            \"rank\": 1\r\n        },\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"098765432\",\r\n            \"use\": \"mobile\",\r\n            \"rank\": 2\r\n        },\r\n        {\r\n            \"system\": \"email\",\r\n            \"value\": \"givenname_bob.familyname@gmail.com\",\r\n            \"use\": \"home\"\r\n        }\r\n    ],\r\n    \"gender\": \"male\",\r\n    \"birthDate\": \"1970-01-22\",\r\n    \"deceasedBoolean\": false,\r\n    \"address\": [\r\n        {\r\n            \"use\": \"home\",\r\n            \"type\": \"both\",\r\n            \"text\": \"123 bookcase ave\",\r\n            \"line\": [\r\n                \"bookcase ave\"\r\n            ],\r\n            \"city\": \"city\",\r\n            \"district\": \"district\",\r\n            \"state\": \"va\",\r\n            \"postalCode\": \"09876\",\r\n            \"period\": {\r\n                \"start\": \"1980-01-31\"\r\n            }\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{fhirurl}}/Patient",
+					"host": [
+						"{{fhirurl}}"
+					],
+					"path": [
+						"Patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Patient",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearerToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resourceType\": \"Patient\",\r\n    \"text\": {\r\n        \"status\": \"generated\",\r\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">William Jones</div>\"\r\n    },\r\n    \"extension\": [\r\n        {\r\n            \"url\": \"http://hl7.org/fhir/us/core/StructureDefinition/us-core-race\",\r\n            \"valueCodeableConcept\": {\r\n                \"coding\": [\r\n                    {\r\n                        \"system\": \"http://hl7.org/fhir/v3/Race\",\r\n                        \"code\": \"2106-3\",\r\n                        \"display\": \"White\"\r\n                    }\r\n                ],\r\n                \"text\": \"race\"\r\n            }\r\n        },\r\n        {\r\n            \"url\": \"http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity\",\r\n            \"valueCodeableConcept\": {\r\n                \"coding\": [\r\n                    {\r\n                        \"system\": \"http://hl7.org/fhir/v3/Ethnicity\",\r\n                        \"code\": \"2186-5\",\r\n                        \"display\": \"Nonhispanic\"\r\n                    }\r\n                ],\r\n                \"text\": \"ethnicity\"\r\n            }\r\n        },\r\n        {\r\n            \"url\": \"http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex\",\r\n            \"valueCode\": \"M\"\r\n        }\r\n    ],\r\n    \"identifier\": [\r\n        {\r\n            \"system\": \"http://va.gov/fhir/NamingSystem/identifier\",\r\n            \"value\": \"VA-103\"\r\n        },\r\n        {\r\n            \"system\": \"http://fhirbot.org\",\r\n            \"value\": \"555121\"\r\n        }\r\n    ],\r\n    \"name\": [\r\n        {\r\n            \"use\": \"official\",\r\n            \"text\": \"James T Kirk\",\r\n            \"family\": \"Kirk\",\r\n            \"given\": [\r\n                \"James\"\r\n            ]\r\n        }\r\n    ],\r\n    \"telecom\": [\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"615-871-6779\",\r\n            \"use\": \"mobile\"\r\n        },\r\n        {\r\n            \"system\": \"email\",\r\n            \"value\": \"captain1@enterprise.com\"\r\n        }\r\n    ],\r\n    \"gender\": \"male\",\r\n    \"birthDate\": \"1966-10-07\",\r\n    \"address\": [\r\n        {\r\n            \"use\": \"home\",\r\n            \"line\": [\r\n                \"Enterprise Star Ship\"\r\n            ],\r\n            \"city\": \"Nashville\",\r\n            \"state\": \"TN\",\r\n            \"postalCode\": \"37214\",\r\n            \"country\": \"USA\"\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{fhirurl}}/Patient",
+					"host": [
+						"{{fhirurl}}"
+					],
+					"path": [
+						"Patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Device",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearerToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"resourceType\": \"Device\",\r\n  \"identifier\": [\r\n    {\r\n      \"system\": \"http://azure/device/registration\",\r\n      \"value\": \"12345\"\r\n    }\r\n  ],\r\n  \"patient\":{\r\n  \t\"reference\":\"Patient/\"\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{fhirurl}}/Device",
+					"host": [
+						"{{fhirurl}}"
+					],
+					"path": [
+						"Device"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Schedule",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearerToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resourceType\": \"Encounter\",\r\n    \"id\": \"abf34306-7fa9-4287-a9b3-52da517d4c19\",\r\n    \"meta\": {\r\n        \"versionId\": \"1\",\r\n        \"lastUpdated\": \"2020-01-29T20:04:45.203+00:00\"\r\n    },\r\n    \"status\": \"finished\",\r\n    \"class\": {\r\n        \"code\": \"BT\"\r\n    },\r\n    \"type\": [\r\n        {\r\n            \"text\": \"AI\"\r\n        },\r\n        {\r\n            \"text\": \"3\"\r\n        }\r\n    ],\r\n    \"subject\": {\r\n        \"reference\": \"Patient/4897c8f0-b20c-456a-a558-fd8e07588056\"\r\n    },\r\n    \"participant\": [\r\n        {\r\n            \"type\": [\r\n                {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://hl7.org/fhir/v3/ParticipationType\",\r\n                            \"code\": \"ATND\",\r\n                            \"display\": \"attender\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Attending Physician\"\r\n                }\r\n            ],\r\n            \"period\": {\r\n                \"start\": \"2019-05-24T16:10:00Z\"\r\n            },\r\n            \"individual\": {\r\n                \"reference\": \"Practitioner/2e3c0a52-0d22-42b9-800b-9755d8fc3e8c\",\r\n                \"display\": \"Mickey Mouse MD\"\r\n            }\r\n        }\r\n    ],\r\n    \"period\": {\r\n        \"start\": \"2019-05-24T16:10:00Z\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{fhirurl}}/Schedule",
+					"host": [
+						"{{fhirurl}}"
+					],
+					"path": [
+						"Schedule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validator",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"bearerToken\", jsonData.access_token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resourceType\": \"Patient\",\r\n    \"active\": true,\r\n    \"name\": [\r\n        {\r\n            \"use\": \"official\",\r\n            \"family\": \"familyname\",\r\n            \"given\": [\r\n                \"givenname\",\r\n                \"middlename\"\r\n            ]\r\n        },\r\n        {\r\n            \"use\": \"usual\",\r\n            \"given\": [\r\n                \"nickname\"\r\n            ]\r\n        }\r\n    ],\r\n    \"telecom\": [\r\n        {\r\n            \"use\": \"home\"\r\n        },\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"123456789\",\r\n            \"use\": \"home\",\r\n            \"rank\": 1\r\n        },\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"098765432\",\r\n            \"use\": \"mobile\",\r\n            \"rank\": 2\r\n        }\r\n    ],\r\n    \"gender\": \"male\",\r\n    \"birthDate\": \"1970-01-22\",\r\n    \"deceasedBoolean\": false,\r\n    \"address\": [\r\n        {\r\n            \"use\": \"home\",\r\n            \"type\": \"both\",\r\n            \"text\": \"123 bookcase ave\",\r\n            \"line\": [\r\n                \"bookcase ave\"\r\n            ],\r\n            \"city\": \"city\",\r\n            \"district\": \"district\",\r\n            \"state\": \"va\",\r\n            \"postalCode\": \"09876\",\r\n            \"period\": {\r\n                \"start\": \"1980-01-31\"\r\n            }\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "https://nextfhirvalidator.azurewebsites.net/validate",
+					"protocol": "https",
+					"host": [
+						"nextfhirvalidator",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validator Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"bearerToken\", jsonData.access_token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resourceType\": \"Patient\",\r\n    \"active\": true,\r\n    \"name\": [\r\n        {\r\n            \"use\": \"official\",\r\n            \"family\": \"familyname\",\r\n            \"given\": [\r\n                \"givenname\",\r\n                \"middlename\"\r\n            ]\r\n        },\r\n        {\r\n            \"use\": \"usual\",\r\n            \"given\": [\r\n                \"nickname\"\r\n            ]\r\n        }\r\n    ],\r\n    \"telecom\": [\r\n        {\r\n            \"use\": \"home\"\r\n        },\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"123456789\",\r\n            \"use\": \"home\",\r\n            \"rank\": 1\r\n        },\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"098765432\",\r\n            \"use\": \"mobile\",\r\n            \"rank\": 2\r\n        }\r\n    ],\r\n    \"gender\": \"male\",\r\n    \"birthDate\": \"1970-01-22\",\r\n    \"deceasedBoolean\": false,\r\n    \"address\": [\r\n        {\r\n            \"use\": \"home\",\r\n            \"type\": \"both\",\r\n            \"text\": \"123 bookcase ave\",\r\n            \"line\": [\r\n                \"bookcase ave\"\r\n            ],\r\n            \"city\": \"city\",\r\n            \"district\": \"district\",\r\n            \"state\": \"va\",\r\n            \"postalCode\": \"09876\",\r\n            \"period\": {\r\n                \"start\": \"1980-01-31\"\r\n            }\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "https://nextfhirvalidator.azurewebsites.net/validate",
+					"protocol": "https",
+					"host": [
+						"nextfhirvalidator",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validator Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"bearerToken\", jsonData.access_token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resourceType\": \"Patient\",\r\n    \"active\": true,\r\n    \"name\": [\r\n        {\r\n            \"use\": \"official\",\r\n            \"family\": \"familyname\",\r\n            \"given\": [\r\n                \"givenname\",\r\n                \"middlename\"\r\n            ]\r\n        },\r\n        {\r\n            \"use\": \"usual\",\r\n            \"given\": [\r\n                \"nickname\"\r\n            ]\r\n        }\r\n    ],\r\n    \"telecom\": [\r\n        {\r\n            \"use\": \"home\"\r\n        },\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"123456789\",\r\n            \"use\": \"home\",\r\n            \"rank\": 1\r\n        },\r\n        {\r\n            \"system\": \"phone\",\r\n            \"value\": \"098765432\",\r\n            \"use\": \"mobile\",\r\n            \"rank\": 2\r\n        }\r\n    ],\r\n    \"gender\": \"male\",\r\n    \"birthDate\": \"1970-01-22\",\r\n    \"deceasedBoolean\": false,\r\n    \"address\": [\r\n        {\r\n            \"use\": \"home\",\r\n            \"type\": \"both\",\r\n            \"text\": \"123 bookcase ave\",\r\n            \"line\": [\r\n                \"bookcase ave\"\r\n            ],\r\n            \"city\": \"city\",\r\n            \"district\": \"district\",\r\n            \"state\": \"va\",\r\n            \"postalCode\": \"09876\",\r\n            \"period\": {\r\n                \"start\": \"1980-01-31\"\r\n            }\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "https://nextfhirvalidator.azurewebsites.net/validate",
+					"protocol": "https",
+					"host": [
+						"nextfhirvalidator",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "export",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearerToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/fhir+json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-MS-AZUREFHIR-AUDIT-USERID",
+						"value": "Dale",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "prefer",
+						"value": "respond-async",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{fhirurl}}/$export?_since=1970-01-01T00:00:00Z",
+					"host": [
+						"{{fhirurl}}"
+					],
+					"path": [
+						"$export"
+					],
+					"query": [
+						{
+							"key": "_since",
+							"value": "1970-01-01T00:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
